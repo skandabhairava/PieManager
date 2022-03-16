@@ -35,10 +35,11 @@ Install PIE Project Manager on pip
 
 ## Usage
 
-```bat
+```bash
 pie <cli-command> <cli-arguments> -<cli-options>
-pie run <args>
-pie <file>.py <args>
+pie <project-dir> ## while outside project dir
+pie run <args> ## while inside project dir
+pie <file>.py <args> ## anywhere
 ```
 
 <hr>
