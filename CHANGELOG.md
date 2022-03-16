@@ -5,7 +5,7 @@
 
 ```diff
 + Official release on pypi
-- Will no longer be hosted on "https://test.pypi.org/project/pie-manager/</a>
+- Will no longer be hosted on "https://test.pypi.org/project/pie-manager/"
 ```
 
 <hr>

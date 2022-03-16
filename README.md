@@ -28,8 +28,18 @@ Install PIE Project Manager on pip
 
 ## Changelogs
 
-[Changelogs](CHANGELOG.md)
+[Changelogs](https://github.com/skandabhairava/Pie-manager/blob/main/CHANGELOG.md)
 
+<hr>
+<br>
+
+## Usage
+
+```bat
+pie <cli-command> <cli-arguments> -<cli-options>
+pie run <args>
+pie <file>.py <args>
+```
 
 <hr>
 <br>
