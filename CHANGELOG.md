@@ -14,7 +14,7 @@
 
 > v0.1.12.2
 
-<span style="color:yellow">* Fixed captcha issue</span>
+<span style="color:yellow">* Fixed captcha issue</span>\
 <span style="color:yellow">* Added Project check while deletion</span>
 
 <hr>
