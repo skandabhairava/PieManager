@@ -11,12 +11,12 @@ setuptools.setup(
     description="A very loose and easy to use project manager",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/pypa/sampleproject",
+    url="https://github.com/skandabhairava/Pie-manager",
     entry_points={
         "console_scripts": ["pie=pie_manager.cli:entry_point"],
     },
     project_urls={
-        "Bug Tracker": "https://github.com/pypa/sampleproject/issues",
+        "Bug Tracker": "https://github.com/skandabhairava/Pie-manager/issues",
     },
     classifiers=[
         "Programming Language :: Python :: 3",
