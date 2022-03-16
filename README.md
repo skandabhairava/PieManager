@@ -86,3 +86,10 @@ pie <file>.py <args> ## anywhere
 | show | Displays pip package of the virtual environment. |
 | uninstall | Uninstall a package from the virtual environment. |
 | ver | Displays or Changes the version of the python project. |
+
+<hr>
+<br>
+
+## CLI Demonstration
+
+https://user-images.githubusercontent.com/58636952/158674913-2b969a30-54db-447b-9541-78871ff18356.mp4
