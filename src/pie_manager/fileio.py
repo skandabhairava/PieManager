@@ -64,7 +64,7 @@ def get_config():
 
 changelog = f"""
 {Fore.GREEN}Pie Project Manager{Fore.RESET}
-{Fore.GREEN}v0.1.12.2{Style.RESET_ALL}
+{Fore.GREEN}v1.0.0{Style.RESET_ALL}
 
 {Fore.GREEN}+ Official release on pypi{Fore.RESET}
 {Fore.RED}- Will no longer be hosted on test pypi{Fore.RESET}
