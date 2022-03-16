@@ -1,0 +1,6 @@
+click==8.0.1
+colorama==0.4.4
+pip==21.3.1
+pipreqs==0.4.11
+setuptools==57.4.0
+yaspin==2.1.0
