@@ -1,4 +1,4 @@
-import click, sys, os, subprocess, json, shutil, random, zipfile
+import click, sys, os, subprocess, json, shutil, random, zipfile, errno, stat
 from string import ascii_letters
 from colorama import init, Fore
 from yaspin import yaspin
@@ -8,7 +8,7 @@ from typing import Union
 from . import fileio, click_fix
 
 __app_name__ = "pie-manager"
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 PATH = fileio.check_config()
 
 _ENTRY_POINT = 1
@@ -20,6 +20,16 @@ def _hide_cursor():
 @staticmethod
 def _show_cursor():
     ...
+
+def handle_remove_readonly(func, path, exc):
+    """
+    Thanks to https://stackoverflow.com/questions/1213706/what-user-do-python-scripts-run-as-in-windows for the fix
+    """
+    if func in (os.rmdir, os.remove, os.unlink) and exc[1].errno == errno.EACCES:
+        os.chmod(path, stat.S_IRWXU| stat.S_IRWXG| stat.S_IRWXO) # 0777
+        func(path)
+    else:
+        raise exc
 
 if os.name == "nt":
     Yaspin._show_cursor = _show_cursor
@@ -112,7 +122,7 @@ def delete_project(project_name):
         click.echo(Fore.RED + "> Please type this captcha to confirm project deletion: " + Fore.GREEN + captcha_text + Fore.RESET)
         input_captcha:str = click.prompt(Fore.GREEN + "> Enter captcha" + Fore.RESET, type=str)
         if input_captcha.upper() == captcha_text:
-            shutil.rmtree(project_name)
+            shutil.rmtree(project_name, onerror=handle_remove_readonly, ignore_errors=False)
             click.echo(Fore.GREEN + "> Project successfully deleted." + Fore.RESET)
         else:
             click.echo(Fore.RED + "> Wrong captcha. Deletion of project aborted" + Fore.RESET)
@@ -174,7 +184,7 @@ def unpkg(project:str, force):
 
             if force:
                 if os.path.isdir(project[:-4]):
-                    shutil.rmtree(project[:-4])
+                    shutil.rmtree(project[:-4], onerror=handle_remove_readonly, ignore_errors=False)
 
             if os.path.isdir(project[:-4]):
                 click.echo(Fore.RED + f"Project '{project[:-4]}' is already open in this directory." + Fore.RESET)

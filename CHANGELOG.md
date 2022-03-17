@@ -1,4 +1,14 @@
-# Pie Project Manager
+# Pie Project Manager Changelog
+<hr>
+
+> v1.0.1
+
+```diff
++ Updated code for package check to make it more accurate <sysreqs.py>
++ Added yaspin and colorama to package check <sysreqs.py>
++ Fixed issue where deleting project files which contains readonly files inside will crash the program(Windows) <cli.py>
+```
+
 <hr>
 
 > v1.0.0
