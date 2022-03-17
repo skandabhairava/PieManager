@@ -1,6 +1,15 @@
 # Pie Project Manager Changelog
 <hr>
 
+> v1.0.2
+
+```diff
++ Added a yaspin spinner <cli.py>
++ Added yaspin related statements to yaspin specific functions. Increases code length, might reduce code runtime while using other commands
+```
+
+<hr>
+
 > v1.0.1
 
 ```diff

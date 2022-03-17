@@ -55,7 +55,6 @@ pie <file>.py <args> ## anywhere
 | --help | Shows the help message for a certain command. |
 | changelog | Displays the changelog for the current version of PIE. |
 
-<hr>
 <br>
 
 > Outside a project
@@ -69,7 +68,6 @@ pie <file>.py <args> ## anywhere
 | pkg | Packages a project. |
 | unpkg | Unpacks a project. |
 
-<hr>
 <br>
 
 > Inside a project (Directory should contain a "project.json")
@@ -87,7 +85,6 @@ pie <file>.py <args> ## anywhere
 | uninstall | Uninstall a package from the virtual environment. |
 | ver | Displays or Changes the version of the python project. |
 
-<hr>
 <br>
 
 ## CLI Demonstration

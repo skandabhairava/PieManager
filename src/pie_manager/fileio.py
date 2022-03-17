@@ -64,11 +64,10 @@ def get_config():
 
 changelog = f"""
 {Fore.GREEN}Pie Project Manager{Fore.RESET}
-{Fore.GREEN}v1.0.1{Style.RESET_ALL}
+{Fore.GREEN}v1.0.2{Style.RESET_ALL}
 
-{Fore.GREEN}+ Updated code for package check to make it more accurate <sysreqs.py>{Fore.RESET}
-{Fore.GREEN}+ Added yaspin and colorama to package check <sysreqs.py>{Fore.RESET}
-{Fore.GREEN}+ Fixed issue where deleting project files which contains readonly files inside will crash the program(Windows) <cli.py>{Fore.RESET}
+{Fore.GREEN}+ Added a yaspin spinner <cli.py>{Fore.RESET}
+{Fore.GREEN}+ Added yaspin related statements to yaspin specific functions. Increases code length, might reduce code runtime while using other commands{Fore.RESET}
 ----------------
 {Fore.GREEN}For full changelogs, visit https://github.com/skandabhairava/Pie-manager/blob/main/CHANGELOG.md{Fore.RESET}
 """

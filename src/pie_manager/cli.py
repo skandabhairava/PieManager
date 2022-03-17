@@ -1,14 +1,12 @@
 import click, sys, os, subprocess, json, shutil, random, zipfile, errno, stat
 from string import ascii_letters
 from colorama import init, Fore
-from yaspin import yaspin
-from yaspin.core import Yaspin
 init(convert=True)
 from typing import Union
 from . import fileio, click_fix
 
 __app_name__ = "pie-manager"
-__version__ = "1.0.1"
+__version__ = "1.0.2"
 PATH = fileio.check_config()
 
 _ENTRY_POINT = 1
@@ -30,10 +28,6 @@ def handle_remove_readonly(func, path, exc):
         func(path)
     else:
         raise exc
-
-if os.name == "nt":
-    Yaspin._show_cursor = _show_cursor
-    Yaspin._hide_cursor = _hide_cursor
 
 def in_project(main_cmd:str, sub_cmd:Union[str, int], sub_cmd_list:list, sp=None, hide=False):
     if os.path.exists("project.json"):
@@ -144,7 +138,15 @@ def pkg(project, force):
     
     if os.path.exists(project + "/project.json"):
 
-        with yaspin(text=f"{Fore.YELLOW}> Packaging project{Fore.RESET}", color="blue", attrs=["bold"]) as sp:    
+        from yaspin import yaspin, Spinner
+        from yaspin.core import Yaspin
+        sp = Spinner(["-", "\\", "|", "/"], 130)
+        
+        if os.name == "nt":
+            Yaspin._show_cursor = _show_cursor
+            Yaspin._hide_cursor = _hide_cursor
+
+        with yaspin(sp, text=f"{Fore.YELLOW}> Packaging project{Fore.RESET}", color="blue", attrs=["bold"]) as sp:    
             os.chdir(project)
             reqs([], sp)
             os.chdir("..")
@@ -189,6 +191,14 @@ def unpkg(project:str, force):
             if os.path.isdir(project[:-4]):
                 click.echo(Fore.RED + f"Project '{project[:-4]}' is already open in this directory." + Fore.RESET)
                 sys.exit(0)
+
+            from yaspin import yaspin, Spinner
+            from yaspin.core import Yaspin
+            sp = Spinner(["-", "\\", "|", "/"], 130)
+
+            if os.name == "nt":
+                Yaspin._show_cursor = _show_cursor
+                Yaspin._hide_cursor = _hide_cursor
 
             with yaspin(text=f"{Fore.YELLOW}> Un-Packaging project{Fore.RESET}", color="blue", attrs=["bold"]) as sp:
                 try:
@@ -288,6 +298,14 @@ def push(commit_message, remote, branch):
         if CONFIG["git_installed"]:
             try:
 
+                from yaspin import yaspin, Spinner
+                from yaspin.core import Yaspin
+                sp = Spinner(["-", "\\", "|", "/"], 130)
+
+                if os.name == "nt":
+                    Yaspin._show_cursor = _show_cursor
+                    Yaspin._hide_cursor = _hide_cursor
+
                 with yaspin(text=f"{Fore.YELLOW}> Pushing repository{Fore.RESET}", color="blue", attrs=["bold"]) as sp:
                     
                     if subprocess.run(["git", "add", "."], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode == 0:
@@ -333,6 +351,14 @@ def new(name, short_description):
     if os.path.exists(name):
         click.echo(Fore.RED + "Project already exists." + Fore.RESET)
         sys.exit(1)
+
+    from yaspin import yaspin, Spinner
+    from yaspin.core import Yaspin
+    sp = Spinner(["-", "\\", "|", "/"], 130)
+
+    if os.name == "nt":
+        Yaspin._show_cursor = _show_cursor
+        Yaspin._hide_cursor = _hide_cursor
 
     with yaspin(text=f"{Fore.YELLOW}> Creating project{Fore.RESET}", color="blue", attrs=["bold"]) as sp:
         os.mkdir(name)
