@@ -200,7 +200,7 @@ def unpkg(project:str, force):
                 Yaspin._show_cursor = _show_cursor
                 Yaspin._hide_cursor = _hide_cursor
 
-            with yaspin(text=f"{Fore.YELLOW}> Un-Packaging project{Fore.RESET}", color="blue", attrs=["bold"]) as sp:
+            with yaspin(sp, text=f"{Fore.YELLOW}> Un-Packaging project{Fore.RESET}", color="blue", attrs=["bold"]) as sp:
                 try:
                     os.rename(project, project[:-4] + ".zip")
 
@@ -306,7 +306,7 @@ def push(commit_message, remote, branch):
                     Yaspin._show_cursor = _show_cursor
                     Yaspin._hide_cursor = _hide_cursor
 
-                with yaspin(text=f"{Fore.YELLOW}> Pushing repository{Fore.RESET}", color="blue", attrs=["bold"]) as sp:
+                with yaspin(sp, text=f"{Fore.YELLOW}> Pushing repository{Fore.RESET}", color="blue", attrs=["bold"]) as sp:
                     
                     if subprocess.run(["git", "add", "."], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode == 0:
                         sp.write(f"{Fore.GREEN}> Repository added to index{Fore.RESET}")
@@ -360,7 +360,7 @@ def new(name, short_description):
         Yaspin._show_cursor = _show_cursor
         Yaspin._hide_cursor = _hide_cursor
 
-    with yaspin(text=f"{Fore.YELLOW}> Creating project{Fore.RESET}", color="blue", attrs=["bold"]) as sp:
+    with yaspin(sp, text=f"{Fore.YELLOW}> Creating project{Fore.RESET}", color="blue", attrs=["bold"]) as sp:
         os.mkdir(name)
         os.mkdir(name + '/src')
 
