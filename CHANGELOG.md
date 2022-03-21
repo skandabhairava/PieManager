@@ -1,6 +1,14 @@
 # Pie Project Manager Changelog
 <hr>
 
+> v1.0.3
+
+```diff
+! Fixed a critical bug with 'run' and extra cli arguments <cli.py>
+```
+
+<hr>
+
 > v1.0.2
 
 ```diff
