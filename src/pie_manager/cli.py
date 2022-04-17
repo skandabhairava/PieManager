@@ -437,7 +437,7 @@ def register_commands():
             if command == plist:
                 cmd = click.decorators.command(name="list")(command)
             elif command in [run, pip, install, uninstall, show]:
-                cmd = click.command(name="run", context_settings=dict(ignore_unknown_options=True, allow_extra_args=True))(command)
+                cmd = click.command(context_settings=dict(ignore_unknown_options=True, allow_extra_args=True))(command)
             else:
                 cmd = click.decorators.command()(command)
             main.add_command(cmd)
