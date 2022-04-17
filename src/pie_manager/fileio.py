@@ -64,9 +64,9 @@ def get_config():
 
 changelog = f"""
 {Fore.GREEN}Pie Project Manager{Fore.RESET}
-{Fore.GREEN}v1.0.3{Style.RESET_ALL}
+{Fore.GREEN}v1.0.4{Style.RESET_ALL}
 
-{Fore.YELLOW}@ Fixed a critical bug with 'run' and extra cli arguments <cli.py>{Fore.RESET}
+{Fore.YELLOW}@ Fixed a critical bug with 'pip', 'install', 'uninstall', 'show' and extra cli arguments <cli.py>{Fore.RESET}
 ----------------
 {Fore.GREEN}For full changelogs, visit https://github.com/skandabhairava/Pie-manager/blob/main/CHANGELOG.md{Fore.RESET}
 """

@@ -6,7 +6,7 @@ from typing import Union
 from . import fileio, click_fix
 
 __app_name__ = "pie-manager"
-__version__ = "1.0.3"
+__version__ = "1.0.4"
 PATH = fileio.check_config()
 
 _ENTRY_POINT = 1
@@ -436,7 +436,7 @@ def register_commands():
         for command in in_project_commands:
             if command == plist:
                 cmd = click.decorators.command(name="list")(command)
-            elif command == run:
+            elif command in [run, pip, install, uninstall, show]:
                 cmd = click.command(name="run", context_settings=dict(ignore_unknown_options=True, allow_extra_args=True))(command)
             else:
                 cmd = click.decorators.command()(command)

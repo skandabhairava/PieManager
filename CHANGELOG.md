@@ -1,6 +1,14 @@
 # Pie Project Manager Changelog
 <hr>
 
+> v1.0.4
+
+```diff
+! Fixed a critical bug with 'pip', 'install', 'uninstall', 'show' and extra cli arguments <cli.py>
+```
+
+<hr>
+
 > v1.0.3
 
 ```diff
