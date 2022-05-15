@@ -74,7 +74,21 @@ def cfg():
 @click.argument("run", nargs=-1, required=False)
 def run(run):
     """Run a project while inside it's directory."""
-    in_project("python", _ENTRY_POINT, run)
+
+    if not "venv" in os.listdir():
+        if os.name == 'nt':
+            subprocess.run(["python", "-m", "venv", "venv"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        else:
+            subprocess.run(["python3", "-m", "venv", "venv"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+        in_project("pip", "install", ["-r", "../requirements.txt"], hide=True)
+
+        print("Initialised a venv, please restart the program!")
+
+    if os.name == 'nt':
+        in_project("python", _ENTRY_POINT, run)
+    else:
+        in_project("python3", _ENTRY_POINT, run)
 
 @click.argument("install", nargs=-1, required=False)
 def install(install):
@@ -452,19 +466,22 @@ def entry_point():
     if len(arg) > 0:
         if os.path.isdir(arg[0]):
             if os.path.exists(arg[0]+"/project.json"):
-                with open(arg[0]+"/project.json", "r") as f:
-                    project = json.loads(f.read())
-                    os.chdir(arg[0] + "/" + project["working_directory"])
+                os.chdir(arg[0])
+                if not "venv" in os.listdir():
                     if os.name == 'nt':
-                        call = [f"../venv/Scripts/python", project["entry_point"]]
-                        call.extend(arg[1:])
-                        subprocess.run(call, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                        sys.exit(0)
+                        subprocess.run(["python", "-m", "venv", "venv"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
                     else:
-                        call = [f"../venv/bin/python", project["entry_point"]]
-                        call.extend(arg[1:])
-                        subprocess.run(call, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                        sys.exit(0)
+                        subprocess.run(["python3", "-m", "venv", "venv"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+                    in_project("pip", "install", ["-r", "../requirements.txt"], hide=True)
+
+                    print("Initialised a venv, please restart the program!")
+
+                if os.name == 'nt':
+                    in_project("python", _ENTRY_POINT, arg[2:])
+                else:
+                    in_project("python3", _ENTRY_POINT, arg[2:])
+                sys.exit(0)
         if os.path.isfile(arg[0]):
             if arg[0].endswith(".py"):
                 if os.name == 'nt':
