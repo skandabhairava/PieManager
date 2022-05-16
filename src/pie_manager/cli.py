@@ -1,6 +1,7 @@
 import click, sys, os, subprocess, json, shutil, random, zipfile, errno, stat
 from string import ascii_letters
 from colorama import init, Fore
+from pathlib import Path
 init(convert=True)
 from typing import Union
 from . import fileio, click_fix
@@ -84,6 +85,7 @@ def run(run):
         in_project("pip", "install", ["-r", "../requirements.txt"], hide=True)
 
         print("Initialised a venv, please restart the program!")
+        exit()
 
     if os.name == 'nt':
         in_project("python", _ENTRY_POINT, run)
@@ -438,6 +440,19 @@ def listproj():
                 projects.append(folder)
     click.echo(Fore.GREEN + "> Projects in this directory: " + str(projects) + Fore.RESET)
 
+def uninstall():
+    """Deletes Config and other Directories created by this project, in order to update to pie-rust"""
+    fileio.del_config()
+    if os.name == 'nt':
+        # Windows
+        PATH = str(Path(os.getenv('APPDATA') + '\\pie_manager'))
+    else:
+        # Linux
+        PATH = str(Path.home()) + '/pie_manager'
+
+    shutil.rmtree(PATH)
+    print(f"{Fore.GREEN}Removed Config folder{Fore.RESET}")
+
 @main.command()
 def changelog():
     """Displays the changelog for the current version of PIE."""
@@ -461,6 +476,8 @@ def register_commands():
             main.add_command(cmd)
 
 def entry_point():
+    print(f"{Fore.RED}THIS PROJECT IS BEING RE-WRITTEN USING RUST(And will be much faster). THIS PROJECT WILL NO LONGER BE UPDATED FROM HENCEFORTH{Fore.RESET}")
+    print(f"{Fore.RED}CHECK OUT: https://wwww.github.com/skandabhairava/pie-rust FOR FURTHER INFORMATION {Fore.RESET}")
     args = sys.argv
     arg = args[1:]
     if len(arg) > 0:

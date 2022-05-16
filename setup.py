@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="pie-manager",
-    version="1.0.4.2",
+    version="1.0.4.3",
     author="Terroid",
     author_email="skandabhairava@gmail.com",
     description="A very loose and easy to use project manager",
